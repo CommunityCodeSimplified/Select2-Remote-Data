@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta name="author" content="Wallace Oliveira">
+        <meta name="description" content="Demo Select2 - Remote Data">
+        <title>.:::::::INTRAWEB - Select2:::::::.</title>
+
+		<!-- CSS Bootstrap -->		
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">		
+		<!-- CSS Select2 -->				
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />	
+
+	</head>
+    <body class="d-flex  flex-column h-100">
+		<main role="main" class="flex-shrink-0 pt-4">
+			<div class="container">
+				<div class="card">
+					<div class="card-header" style="background: #233c6a"><b style="color:#fff">Select2 - Remote Data</b>
+						<span class="small float-right"><b style="color:#fff">By Júlio dos Anjos / Wallace Oliveira</b></span>
+					</div>
+					<div class="card-body">
+						<h6 class="card-title">Informe código, cnpj ou nome para pesquisar o cliente</h5>
+						{%IWCOMBOBOX%}					
+					</div>
+					<div class="card-footer text-muted" style="background: #233c6a">
+						<button id="BTNOK" type="button" class="btn btn-primary">Ok</button>
+					</div>
+				</div>
+			</div>
+		</main>
+				
+		<!-- Script Obrigatórios -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		<!-- Scripts Select2 (Script Full do select2)-->		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/select2.full.min.js"></script>	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7-rc.0/js/i18n/pt-BR.js"></script>			
+
+		<script>
+			// Link de referência - https://select2.org/data-sources/ajax
+			
+			debugger;
+			
+			$('#IWCOMBOBOX').select2({
+				width: '100%',
+				language: 'pt-BR',
+				ajax: {
+						url: "/$/callback?callback=IWCOMBOBOX",
+						dataType: 'json',
+						delay: 1000,
+						data: function (params) {
+							return {
+								value: params.term
+							};
+						},
+						processResults: function (data, params) {
+							// parse the results into the format expected by Select2
+							// since we are using custom formatting functions we do not need to
+							// alter the remote JSON data, except to indicate that infinite
+							// scrolling can be used
+							params.page = params.page || 1;
+
+							return {
+								results: data.results.map(function(item) {
+									return {
+										// As strings do JSON são armazenados em varíaveis
+										id: item.COD_PESSOA,
+										text: item.PES_RAZAO,
+										description: item.PES_CNPJ_CPF,
+									};
+								}),								
+								pagination: {
+									more: (params.page * 30) < data.total_count
+								}
+							};
+						},
+						cache: true
+				},
+				placeholder: 'Pesquise o cliente para consultar',
+				escapeMarkup: function (markup) { return markup; },
+				minimumInputLength: 1,
+				templateResult: formatRepo,
+				templateSelection: formatRepoSelection
+				});
+				
+			function formatRepo (repo) {
+				if (repo.loading) {
+					return repo.text;
+				}
+					
+				var markup = "<div class='d-flex justify-content-between'>" +
+					"<div><h6 class='mb-1'>"+repo.text+"</h6>"+
+					"<small>"+repo.description+"</small>"+
+					"</div>"+
+					"<div><p class='mb-0'><strong>"+repo.id+"</strong></p>"+
+					"</div>"+
+					"</div>";
+					
+				return markup;
+			}
+
+			function formatRepoSelection (repo) {
+			    return repo.text;
+			}
+			
+			$('#IWCOMBOBOX').focus();
+		</script>
+	</body>		
+</html>

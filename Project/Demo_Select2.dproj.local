@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/07/27 10:30:24.000.646,=D:\Select2\Unit1.pas</Transaction>
+    <Transaction>2020/07/27 10:30:27.000.432,=D:\Select2\ServerController.pas</Transaction>
+    <Transaction>2020/07/27 10:30:27.000.571,=D:\Select2\UserSessionUnit.pas</Transaction>
+    <Transaction>2020/07/27 14:19:13.168,D:\Select2\Source\Page\uFormPageSelect2.pas=D:\Select2\Unit1.pas</Transaction>
+    <Transaction>2020/07/27 14:19:13.168,D:\Select2\Source\Page\uFormPageSelect2.dfm=D:\Select2\Unit1.dfm</Transaction>
+    <Transaction>2020/07/27 14:19:52.466,D:\Select2\Project\Demo_Select2.dproj=D:\Select2\Select2.dproj</Transaction>
+    <Transaction>2020/07/27 14:29:58.107,D:\Select2\Project\Demo_Select2.dproj=D:\Select2\Project\Demo_Select2.dproj</Transaction>
+    <Transaction>2020/07/27 14:30:21.950,D:\Select2\Source\Controller\uUserSession.pas=D:\Select2\UserSessionUnit.pas</Transaction>
+    <Transaction>2020/07/27 14:30:21.950,D:\Select2\Source\Controller\uUserSession.dfm=D:\Select2\UserSessionUnit.dfm</Transaction>
+    <Transaction>2020/07/27 14:30:47.981,D:\Select2\Source\Controller\uServerController.dfm=D:\Select2\ServerController.dfm</Transaction>
+    <Transaction>2020/07/27 14:30:47.981,D:\Select2\Source\Controller\uServerController.pas=D:\Select2\ServerController.pas</Transaction>
+  </Transactions>
+</BorlandProject>
